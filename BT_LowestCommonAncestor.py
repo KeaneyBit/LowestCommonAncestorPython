@@ -37,3 +37,4 @@ result = result.value
 print("\nLowest Common Ancestor of Node " + format(p) + " and Node " +
 format(q) + " is: Node " + format(result) + "\n")
 
+#Adding more testing
