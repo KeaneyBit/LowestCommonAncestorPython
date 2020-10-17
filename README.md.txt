@@ -15,3 +15,7 @@ Heres the steps to what I did:
 1. Created a new directory in my project folder called "tests"
 2. Then we right click -> new -> test file -> then called it lowestCommonAncestorTest.py
 3. Then we add the line "import unittest" as this is python's unit testing library
+4. There are then plenty of rules that need to be followed when creating a test case.
+
+In order to get the tests working in VSCode, the editor I used for these testings, I had to enable testing by following this 
+tutorial here: https://code.visualstudio.com/docs/python/testing
