@@ -19,3 +19,7 @@ Heres the steps to what I did:
 
 In order to get the tests working in VSCode, the editor I used for these testings, I had to enable testing by following this 
 tutorial here: https://code.visualstudio.com/docs/python/testing
+
+#DAG
+**26-10-2020**
+-Created first DAG file, structure
