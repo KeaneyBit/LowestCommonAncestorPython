@@ -1,12 +1,12 @@
 {
-    "python.testinself.unittestArgs": [
+    "python.testing.unittestArgs": [
         "-v",
         "-s",
         ".",
         "-p",
         "*test.py"
     ],
-    "python.testinself.pytestEnabled": False,
-    "python.testinself.nosetestsEnabled": False,
-    "python.testinself.unittestEnabled": True
+    "python.testing.pytestEnabled": false,
+    "python.testing.nosetestsEnabled": false,
+    "python.testing.unittestEnabled": true
 }
