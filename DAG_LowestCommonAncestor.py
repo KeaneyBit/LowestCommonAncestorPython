@@ -63,40 +63,41 @@ class DAG_Graph:
 
     #     return null #/returns -1 if no ancestor found
     
-# ##
-#     def isCyclic(int i, boolean[] visited, boolean[] recStack) {
+    # Cyclic Actual
+    def isCyclic(self, i, visited, recStack):
 
-#         // Mark the current node as visited and
-#         // part of recursion stack
-#         if (recStack[i]):
-#             return true
+        # Mark the current node as visited and
+        # part of recursion stack
+        if (recStack[i]):
+            return True
 
-#         if (visited[i]):
-#             return false
+        if (visited[i]):
+            return False
 
-#         visited[i] = true
+        visited[i] = True
 
-#         recStack[i] = true
-#         LinkedList<AdjListNode> children = adj[i];
+        recStack[i] = True
 
-#         for (AdjListNode c: children)
-#             if (isCyclic(c.getV(), visited, recStack))
-#                 return true;
+        for c in self.graph[i]:
+            if ( self.isCyclic(c, visited, recStack)):
+                return True
 
-#         recStack[i] = false;
+        recStack[i] = False
 
-#         return false;
-#     }
-#     boolean checkIfAcyclic () {
-#         boolean[] visited = new boolean[V];
-#         boolean[] recStack = new boolean[V];
+        return False
 
-#         for(int i = 0; i<V;i++)
-#             if(isCyclic(i, visited, recStack))
-#                 return true;
+    # Cyclic Check #1
+    def checkIfAcyclic (self):
+        visited = [False] *self.V
+        recStack =[False] *self.V
 
-#         return false;
-#     }
+        for i in range (self.V):
+            if(self.isCyclic(i, visited, recStack)):
+                return True
+
+        return False
+
+
     def printGraph(self):
         for i in range(self.V):
             if(len(self.graph[i]) != 0):
@@ -115,40 +116,56 @@ b.addEdge(5, 7)
 b.addEdge(6, 7)
 b.addEdge(7, 8)
 b.printGraph()
+if(b.checkIfAcyclic()):
+    print("Hey Mama!")
 
+cycle = DAG_Graph(9)
+cycle.addEdge(0, 1)
+cycle.addEdge(0, 2)
+cycle.addEdge(2, 1)
+cycle.addEdge(1, 2)
+cycle.addEdge(2, 4)
+cycle.addEdge(4, 3)
+cycle.addEdge(3, 1)
+cycle.addEdge(3, 6)
+cycle.addEdge(6, 8)
+cycle.addEdge(7, 8)
+b.printGraph()
+if(cycle.checkIfAcyclic()):
+    print("Hey Son!")
 
-        # if(b.checkIfAcyclic()) {System.out.println("hello there b");}
+        # if(b.checkIfAcyclic()) {System.out.println("hello there b")}
         # printGraph(b)
-        # DAG_LowestCommonAncestor g = new DAG_LowestCommonAncestor(9);
-        # g.addEdge(0, 1);
-        # g.addEdge(0, 2);
-        # g.addEdge(1, 3);
-        # g.addEdge(2, 4);
-        # g.addEdge(3, 5);
-        # g.addEdge(4, 6);
-        # g.addEdge(5, 7);
-        # g.addEdge(6, 7);
-        # g.addEdge(7, 8);
+        # DAG_LowestCommonAncestor g = new DAG_LowestCommonAncestor(9)
+        # g.addEdge(0, 1)
+        # g.addEdge(0, 2)
+        # g.addEdge(1, 3)
+        # g.addEdge(2, 4)
+        # g.addEdge(3, 5)
+        # g.addEdge(4, 6)
+        # g.addEdge(5, 7)
+        # g.addEdge(6, 7)
+        # g.addEdge(7, 8)
         # //Print Graph
-        # DAG_LowestCommonAncestor cycle = new DAG_LowestCommonAncestor(9);
-        # cycle.addEdge(0, 1);
-        # cycle.addEdge(0, 2);
-        # cycle.addEdge(2, 1);
-        # cycle.addEdge(1, 2);
-        # cycle.addEdge(2, 4);
-        # cycle.addEdge(4, 3);
-        # cycle.addEdge(3, 1);
-        # cycle.addEdge(3, 6);
-        # cycle.addEdge(6, 8);
-        # cycle.addEdge(7, 8);
+        # DAG_LowestCommonAncestor cycle = new DAG_LowestCommonAncestor(9)
+        # cycle.addEdge(0, 1)
+        # cycle.addEdge(0, 2)
+        # cycle.addEdge(2, 1)
+        # cycle.addEdge(1, 2)
+        # cycle.addEdge(2, 4)
+        # cycle.addEdge(4, 3)
+        # cycle.addEdge(3, 1)
+        # cycle.addEdge(3, 6)
+        # cycle.addEdge(6, 8)
+        # cycle.addEdge(7, 8)
 
-        # printGraph(cycle);
-        # printGraph(g);
+        # printGraph(cycle)
+        # printGraph(g)
         # if(cycle.checkIfAcyclic()) {
-        #     System.out.println("Mama Mia! There's a cycle!");
+        #     System.out.println("Mama Mia! There's a cycle!")
         # }
         # if(g.checkIfAcyclic()) {
-        #     System.out.println("Mama Mia! There's a cycle!");
+        #     System.out.println("Mama Mia! There's a cycle!")
         # }
-        # System.out.println(g.lowestCommonAncestor(g, 1, 5).getV()); //7
-        # System.out.println(g.lowestCommonAncestor(g, 5, 2).getV()); //7
+        # System.out.println(g.lowestCommonAncestor(g, 1, 5).getV()) //7
+        # System.out.println(g.lowestCommonAncestor(g, 5, 2).getV()) //7
