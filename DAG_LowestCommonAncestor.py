@@ -19,6 +19,7 @@ class DAG_Graph:
     # function to add an edge to graph 
     def addEdge(self,u,v): 
         self.graph[u].append(v) 
+        self.incE()
     
     def incE (self):
         self.E = self.E + 1
@@ -26,42 +27,44 @@ class DAG_Graph:
 
     # I wasn't able to think of a way to create a lowestCommonAncestor function using
     # recursion so I went an used a matrix method instead
-    # def lowestCommonAncestor(self, v, w):
-    #     if(self.checkIfAcyclic()):
-    #         return null
+    def lowestCommonAncestor(self, v, w):
+        if(self.checkIfAcyclic()):
+            return None
 
-    #     vArr = [0] * self.E
-    #     wArr = [0] * self.E
-    #     vMarked = [false] *self.V
-    #     wMarked = [false] *self.V
-    #     vCount =0
-    #     wCount =0
-    #     vArr[vCount]=v
-    #     wArr[wCount]=w
-    #     #//mark all vertices as not been visited yet
-    #     for i in range(0, self.V):
-    #         vMarked[j]=false
-    #         wMarked[j]=false
+        vArr = [0] * self.E
+        wArr = [0] * self.E
+        vMarked = [False] *self.V
+        wMarked = [False] *self.V
+        vCount =0
+        wCount =0
+        vArr[vCount]=v
+        wArr[wCount]=w
+        #//mark all vertices as not been visited yet
+        for j in range(0, self.V):
+            vMarked[j]=False
+            wMarked[j]=False
+
         
-    #     for i in range(0, self.V):
-    #         vMarked[v] =true
-    #         wMarked[w] =true
-    #         for i in range(0, self.graph[i].size()):
-    #             if(g.adj[i].get(j)!=null and vMarked[i]):
-    #                 vCount = vCount + 1
-    #                 vArr[vCount]=j
-    #                 vMarked[j]=true
+        for i in range(self.V):
+            vMarked[v] =True
+            wMarked[w] =True
+            j =0
+            for j in range(len(self.graph[i])):
+                if(self.graph[i][j] !=None and vMarked[i]):
+                    vCount = vCount + 1
+                    vArr[vCount]=j
+                    vMarked[j]=True
         
-    #             if(g.adj[i].get(j)!=null and wMarked[i]):
-    #                 wCount = wCount + 1
-    #                 wArr[wCount]=j
-    #                 wMarked[j]=true
+                if(self.graph[i][j]!=None and wMarked[i]):
+                    wCount = wCount + 1
+                    wArr[wCount]=j
+                    wMarked[j]=True
                 
-    #             if(wArr[wCount]==vArr[vCount]):
-    #                 #return wArr[wCount]
-    #                 return g.adj[i].get(wArr[wCount])
+                if(wArr[wCount]==vArr[vCount]):
+                    #return wArr[wCount]
+                    return self.graph[i][wArr[wCount]]
 
-    #     return null #/returns -1 if no ancestor found
+        return None #/returns -1 if no ancestor found
     
     # Cyclic Actual
     def isCyclic(self, i, visited, recStack):
@@ -85,7 +88,6 @@ class DAG_Graph:
         recStack[i] = False
 
         return False
-
     # Cyclic Check #1
     def checkIfAcyclic (self):
         visited = [False] *self.V
@@ -96,8 +98,6 @@ class DAG_Graph:
                 return True
 
         return False
-
-
     def printGraph(self):
         for i in range(self.V):
             if(len(self.graph[i]) != 0):
@@ -134,38 +134,9 @@ b.printGraph()
 if(cycle.checkIfAcyclic()):
     print("Hey Son!")
 
-        # if(b.checkIfAcyclic()) {System.out.println("hello there b")}
-        # printGraph(b)
-        # DAG_LowestCommonAncestor g = new DAG_LowestCommonAncestor(9)
-        # g.addEdge(0, 1)
-        # g.addEdge(0, 2)
-        # g.addEdge(1, 3)
-        # g.addEdge(2, 4)
-        # g.addEdge(3, 5)
-        # g.addEdge(4, 6)
-        # g.addEdge(5, 7)
-        # g.addEdge(6, 7)
-        # g.addEdge(7, 8)
-        # //Print Graph
-        # DAG_LowestCommonAncestor cycle = new DAG_LowestCommonAncestor(9)
-        # cycle.addEdge(0, 1)
-        # cycle.addEdge(0, 2)
-        # cycle.addEdge(2, 1)
-        # cycle.addEdge(1, 2)
-        # cycle.addEdge(2, 4)
-        # cycle.addEdge(4, 3)
-        # cycle.addEdge(3, 1)
-        # cycle.addEdge(3, 6)
-        # cycle.addEdge(6, 8)
-        # cycle.addEdge(7, 8)
-
-        # printGraph(cycle)
-        # printGraph(g)
-        # if(cycle.checkIfAcyclic()) {
-        #     System.out.println("Mama Mia! There's a cycle!")
-        # }
-        # if(g.checkIfAcyclic()) {
-        #     System.out.println("Mama Mia! There's a cycle!")
-        # }
-        # System.out.println(g.lowestCommonAncestor(g, 1, 5).getV()) //7
-        # System.out.println(g.lowestCommonAncestor(g, 5, 2).getV()) //7
+b.lowestCommonAncestor(1, 5)
+print(format(b.lowestCommonAncestor(1, 5))) #7 "LCA of 5,1 = 7"
+print(format(b.lowestCommonAncestor(5, 1))) #7 "LCA of 1,5 = 7"
+print(format(b.lowestCommonAncestor(0, 2))) #4 "LCA of 0,2 = 4"
+print(format(b.lowestCommonAncestor(0, 0))) #1 "LCA of 0,0 = 1"
+print(format(b.lowestCommonAncestor(0, 7))) #8 "LCA of 0,7 = 8"
