@@ -24,3 +24,4 @@ tutorial here: https://code.visualstudio.com/docs/python/testing
 **26-10-2020**
 -Created first DAG file, structure
 -Finished All DAG methods
+-Finished Tests
